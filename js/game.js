@@ -1,5 +1,13 @@
 (function(window) {
   Game = {
+    init: function() {
+      $('#roller button.add').on('click', function() {
+        Game.addDie();
+      });
+      $('#roller button.roll').on('click', function() {
+        Game.rollDice();
+      });
+    },
     getValue: function() {
       return Math.floor((Math.random()*6)+1);
     },
@@ -11,15 +19,8 @@
     },
     rollDice: function() {
       dice = Game.getDice();
-      value = Game.getValue();
-      $(dice).text(value);
-    },
-    init: function() {
-      $('#roller button.add').on('click', function() {
-        Game.addDie();
-      });
-      $('#roller button.roll').on('click', function() {
-        Game.rollDice();
+      $(dice).each( function() {
+        $(this).text(Game.getValue());
       });
     }
   };
