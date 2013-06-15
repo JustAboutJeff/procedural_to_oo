@@ -1,5 +1,15 @@
 (function(window) {
-  Game = {
+
+  function Die() {
+    this.face = 1;
+  };
+
+  Die.prototype.roll = function() {
+    return this.face = Math.floor((Math.random()*6)+1);
+  };
+
+  var Game = {
+    gameDice: [],
     init: function() {
       $('#roller button.add').on('click', function() {
         Game.addDie();
@@ -8,19 +18,15 @@
         Game.rollDice();
       });
     },
-    getValue: function() {
-      return Math.floor((Math.random()*6)+1);
-    },
-    getDice: function() {
-      return $('.die');
-    },
     addDie: function() {
-      $('.dice').append('<div class="die">0</div>');
+      this.gameDice.push(new Die());
+      $('.dice').append('<div class="die">'+this.gameDice[this.gameDice.length-1].face+'</div>');
     },
     rollDice: function() {
-      dice = Game.getDice();
-      $(dice).each( function() {
-        $(this).text(Game.getValue());
+      this.gameDice.forEach( function(die) {
+        die.roll();
+        console.log(die.face);
+        $('.die').text(die.face);
       });
     }
   };
