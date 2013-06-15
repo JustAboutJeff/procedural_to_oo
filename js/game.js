@@ -1,7 +1,8 @@
 (function(window) {
 
-  function Die() {
-    this.face = 1;
+  function Die(id) {
+    this.face = this.roll();
+    this.id = id;
   };
 
   Die.prototype.roll = function() {
@@ -19,14 +20,14 @@
       });
     },
     addDie: function() {
-      this.gameDice.push(new Die());
-      $('.dice').append('<div class="die">'+this.gameDice[this.gameDice.length-1].face+'</div>');
+      die = new Die(this.gameDice.length)
+      this.gameDice.push(die);
+      $('.dice').append('<div id='+ die.id +' class="die">'+ this.gameDice[this.gameDice.length-1].face +'</div>');
     },
     rollDice: function() {
       this.gameDice.forEach( function(die) {
         die.roll();
-        console.log(die.face);
-        $('.die').text(die.face);
+        $('.die').eq(die.id).text(die.face);
       });
     }
   };
