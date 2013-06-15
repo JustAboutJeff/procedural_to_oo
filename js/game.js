@@ -3,7 +3,7 @@
   function Die(id) {
     this.face = this.roll();
     this.id = id;
-  };
+  }
 
   Die.prototype.roll = function() {
     return this.face = Math.floor((Math.random()*6)+1);
@@ -20,7 +20,7 @@
       });
     },
     addDie: function() {
-      die = new Die(this.gameDice.length)
+      die = new Die(this.gameDice.length);
       this.gameDice.push(die);
       $('.dice').append('<div id='+ die.id +' class="die">'+ this.gameDice[this.gameDice.length-1].face +'</div>');
     },
